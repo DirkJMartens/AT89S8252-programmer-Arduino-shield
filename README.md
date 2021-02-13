@@ -63,4 +63,3 @@ A few additional pointers:
 - The oscillator frequency is 12 times higher than the machine cycle frequency (e.g. 2 MHz for 24 MHz) 
 - AT89S8252 instructions take 1 to 4 machine cycles to complete, making it a max. 1 MIPS chip 
 - For comparison, an ATMega running at 20 MHz oscillator frequency completes 20 MIPS 
-- 

@@ -1,43 +1,47 @@
 # AT89S8252-programmer-Arduino-shield
 An ISP programmer based on an Arduino Uno shield with a Python script programmer
 
-The software Python script was developed by M. Tirado and can be found here https://github.com/mtirado1/at89s8252-arduino 
-The hardware is an Arduino Uno shield with a 40-pin DIP-socket to receive the target AT89S8252 to be programmed. 
+AVRDUDE can be made to run using a modified t.conf file o accommodate some of the 8051-derived uCs, but the USBasp is a bigger challenge. 
+Mainly because virtually all uCs use and active LOW RESET signals where the 8051-family uses active HIGH. 
 
-For the shield, I used a protoshield I bought and used wire-wrapping to make the connections (see pics): 
+A Python script was developed by M. Tirado and can be found here https://github.com/mtirado1/at89s8252-arduino. 
+Using a few discrete components, I made an Arduino Uno shield with a 40-pin DIP-socket to receive the target AT89S8252 to be programmed. 
+
+For the shield, I used a protoshield and used wire-wrapping to make the connections (see pics): 
 - Connect MISO/MOSI/SCK/RESET and GND/VCC between Uno and target DIP socket 
 - Connect a crystal between pins 18 and 19 (maximum 24 MHz) 
 - In my design, the crystal oscillator did not work very well and replaced it with a TCXO on pin 19 and leaving pin 18 not connected 
 - Pin 31 (EA) connected to Vcc to ensure code is run from internal program memory 
 - Pin 9 (RESET) with a pull-down to GND and a 10uF cap to Vcc 
-- Lastly, I installed some headerpins and resistors so I can mount some LEDs for basic "blink" testing. 
+- I installed some headerpins and resistors so I can mount some LEDs for blinkenlights and for some testing the "blink" program. 
 
 Arduino UNO-based programmer for the AT89S8252
-==============================================
-- Upload the programmer.ino sketch into the Arduino Uno 
-- Mount the target AT89S8252 into the socket on the Arduino programmer shield 
+----------------------------------------------
+- Upload the "programmer.ino" sketch into the Arduino Uno. 
+- Connect LEDs with anode via a 220 ohm series-resistor to Vcc 
+- Connected LEDs with cathode to pins 1/2/3 of the AT89 and they should now blink 
+- Mount the target AT89S8252 into the socket on the Arduino programmer shield and the shield onto the Uno. 
 - Edit the config.py file: 
 	- Ensure the COM-port matches the port for the UNO
 	- Edit the path to point the "blink.hex" file provided in the "blink" folder 
 	- Save and close 
-- Connect the programmer and in a Command Prompt, run the command "py writeprogram.py"
-- This Python script will: 
-	- List the full path of the .HEX file that will be uploaded 
-	- List the COM port it will use 
-	- Connection to the programmer works when you see "Programmer ready." 
+- Connect the programmer and in a Command Prompt, run the command "py writeprogram.py".
+- This Python script will output the following information: 
+	- List the full path of the .HEX file that will be uploaded (as per config.py) 
+	- List the COM port it will use (as per config.py)
+	- Your programmer responds and you see "Programmer ready." 
 	- It will then list the content of the .hex file 
 	- Upload the .hex file into the target 
 	- It will then ask the question to verify the upload 
 	- Press "y" followed by Enter to run the verification cycle. 
-	- Edit script line 46 and replace it with "a = 'y'" to always verify without asking for confirmation 
+	- You can edit script line 46 and replace it with "a = 'y'" to always verify without asking for confirmation 
+	- This is especially useful when calling the script from within the Keil uVision IDE 
 - This should have uploaded the "blink.hex" file into the AT89S8252 
-- Connect LEDs with anode via a 220 ohm series-resistor to Vcc 
-- Connected LEDs with cathode to pins 1/2/3 of the AT89 and they should now blink 
-- You now have confirmed all hardware and software is working properly configured and connected. 
+- If you have some blinking LED, you have confirmed all hardware and software is properly configured and connected. 
 
 For your own source code: 
 -------------------------
-- Enter the source code in the uVision IDE from Keil 
+- Enter the source code in the uVision IDE from Keil (can be downloaded from their website for free) 
 - A few options must be changed from the default settings: 
 	- "Flash - Download" will be disabled by default. To enable, edit the following: 
 	- Under "Project - Options for Target - Output", ensure "Create HEX file" is ticked 
@@ -53,7 +57,7 @@ For your own source code:
 
 A few additional pointers: 
 --------------------------
-- AVRDUDE does not have the config file for the AT89S8252 so USBasp cannot be used 
+- AVRDUDE does not have the config file for the AT89S8252 but there are some modified versions available on the internet 
 - The most basic circuit the AT89S8252 needs to operate is: 
 	- Supply power through GND on pin 20 and Vcc on pin 40 
 	- A crystal between pins 18 and 19 _OR_ a TCXO on pin 19 with pin 18 not connected (max 24 MHz) 

@@ -4,12 +4,13 @@ An ISP programmer based on an Arduino Uno shield with a Python script programmer
 The software Python script was developed by M. Tirado and can be found here https://github.com/mtirado1/at89s8252-arduino 
 The hardware is an Arduino Uno shield with a 40-pin DIP-socket to receive the target AT89S8252 to be programmed. 
 
-For the shield: 
+For the shield, I used a protoshield I bought and used wire-wrapping to make the connections (see pics): 
 - Connect MISO/MOSI/SCK/RESET and GND/VCC between Uno and target DIP socket 
 - Connect a crystal between pins 18 and 19 (maximum 24 MHz) 
 - In my design, the crystal oscillator did not work very well and replaced it with a TCXO on pin 19 and leaving pin 18 not connected 
 - Pin 31 (EA) connected to Vcc to ensure code is run from internal program memory 
 - Pin 9 (RESET) with a pull-down to GND and a 10uF cap to Vcc 
+- Lastly, I installed some headerpins and resistors so I can mount some LEDs for basic "blink" testing. 
 
 Arduino UNO-based programmer for the AT89S8252
 ==============================================

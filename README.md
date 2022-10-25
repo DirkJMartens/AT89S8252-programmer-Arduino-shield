@@ -1,7 +1,7 @@
 # AT89S8252-programmer-Arduino-shield
 An ISP programmer based on an Arduino Uno shield with a Python script programmer
 
-AVRDUDE can be made to run using a modified t.conf file o accommodate some of the 8051-derived uCs, but the USBasp is a bigger challenge. 
+AVRDUDE can be made to run using a modified conf file to accommodate some of the 8051-derived uCs, but the USBasp is a bigger challenge. 
 Mainly because virtually all uCs use and active LOW RESET signals where the 8051-family uses active HIGH. 
 
 A Python script was developed by M. Tirado and can be found here https://github.com/mtirado1/at89s8252-arduino. 

@@ -2,13 +2,13 @@
 An ISP programmer based on an Arduino Uno shield with a Python script programmer
 
 AVRDUDE can be made to run using a modified conf file to accommodate some of the 8051-derived uCs, but the USBasp is a bigger challenge. 
-Mainly because virtually all uCs use and active LOW RESET signals where the 8051-family uses active HIGH. 
+Mainly because virtually all uCs use an active LOW RESET signals where the 8051-family uses active HIGH. 
 
-A Python script was developed by M. Tirado and can be found here https://github.com/mtirado1/at89s8252-arduino. 
-Using a few discrete components, I made an Arduino Uno shield with a 40-pin DIP-socket to receive the target AT89S8252 to be programmed. 
+A Python script was developed by M. Tirado which can be found here https://github.com/mtirado1/at89s8252-arduino. 
+Using a few discrete components, I made an Arduino Uno shield with a 40-pin DIL-socket to receive the target AT89S8252 to be programmed. 
 
 For the shield, I used a protoshield and used wire-wrapping to make the connections (see pics): 
-- Connect MISO/MOSI/SCK/RESET and GND/VCC between Uno and target DIP socket 
+- Connect MISO/MOSI/SCK/RESET and GND/VCC between Uno and target DIL socket 
 - Connect a crystal between pins 18 and 19 (maximum 24 MHz) 
 - In my design, the crystal oscillator did not work very well and replaced it with a TCXO on pin 19 and leaving pin 18 not connected 
 - Pin 31 (EA) connected to Vcc to ensure code is run from internal program memory 
